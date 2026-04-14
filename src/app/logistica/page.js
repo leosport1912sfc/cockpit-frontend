@@ -18,7 +18,7 @@ export default function CockpitLogistica() {
     if (!pedidoSelecionado) return;
 
     try {
-      const resposta = await fetch(`http://localhost:3001/api/pedidos/${pedidoSelecionado.id}`, {
+      const resposta = await fetch(`https://cockpit-backend-mmd8.onrender.com/api/pedidos/${pedidoSelecionado.id}`, {
         method: 'PATCH',
       });
 
@@ -48,7 +48,7 @@ export default function CockpitLogistica() {
 
   // A magia acontece aqui: o React "bate na porta" da nossa API assim que a tela abre
   useEffect(() => {
-    fetch('http://localhost:3001/api/pedidos')
+    fetch('https://cockpit-backend-mmd8.onrender.com/api/pedidos')
       .then((resposta) => resposta.json())
       .then((dadosDaApi) => {
         setPedidos(dadosDaApi); // Guarda os dados no estado

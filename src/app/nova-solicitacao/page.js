@@ -22,7 +22,7 @@ export default function NovaSolicitacao() {
     setEnviando(true);
 
     try {
-      const resposta = await fetch('http://localhost:3001/api/pedidos', {
+      const resposta = await fetch('https://cockpit-backend-mmd8.onrender.com/api/pedidos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
