@@ -26,8 +26,8 @@ export default function NovaSolicitacao() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // Se o usuário deixar em branco, mandamos um texto padrão para não quebrar nada
-          solicitante: solicitante || "Servidor do DETRAN", 
+          solicitante: solicitante || "Servidor do DETRAN",
+          emailSolicitante: "leonardo.souza@detran.mg.gov.br", // <--- ADICIONE ISSO AQUI! (Pode pôr um estado do React depois)
           destino: destino || "Destino não informado",
           dataPartida: dataPartida || "Data pendente"
         }),
@@ -58,47 +58,47 @@ export default function NovaSolicitacao() {
 
       <main className="container" style={{ maxWidth: '600px' }}>
         <div className="progress mb-4" style={{ height: '10px' }}>
-          <div 
-            className="progress-bar bg-dark" 
-            style={{ width: `${(passo / 3) * 100}%`, transition: '0.5s' }} 
+          <div
+            className="progress-bar bg-dark"
+            style={{ width: `${(passo / 3) * 100}%`, transition: '0.5s' }}
           ></div>
         </div>
 
         <div className="card border-0 shadow-sm rounded-4">
           <div className="card-body p-4">
-            
+
             {passo === 1 && (
               <div className="fade-in">
                 <h5 className="fw-bold mb-4">Passo 1: Dados da Viagem</h5>
-                
+
                 <div className="mb-3">
                   <label className="form-label fw-semibold">Nome do Solicitante</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Seu nome completo" 
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Seu nome completo"
                     value={solicitante}
                     onChange={(e) => setSolicitante(e.target.value)} // Salvando cada letra digitada!
                   />
                 </div>
-                
+
                 <div className="mb-3">
                   <label className="form-label fw-semibold">Destino</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Ex: Uberlândia - MG" 
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Ex: Uberlândia - MG"
                     value={destino}
                     onChange={(e) => setDestino(e.target.value)}
                   />
                 </div>
-                
+
                 <div className="row">
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-semibold">Data e Hora de Partida</label>
-                    <input 
-                      type="datetime-local" 
-                      className="form-control" 
+                    <input
+                      type="datetime-local"
+                      className="form-control"
                       value={dataPartida}
                       onChange={(e) => setDataPartida(e.target.value)}
                     />
@@ -141,21 +141,21 @@ export default function NovaSolicitacao() {
             )}
 
             <div className="d-flex justify-content-between mt-4 pt-3 border-top">
-              <button 
-                className={`btn btn-light fw-bold ${passo === 1 ? 'invisible' : ''}`} 
+              <button
+                className={`btn btn-light fw-bold ${passo === 1 ? 'invisible' : ''}`}
                 onClick={passoAnterior}
                 disabled={enviando}
               >
                 Voltar
               </button>
-              
+
               {passo < 3 ? (
                 <button className="btn fw-bold px-4 text-dark" style={{ backgroundColor: '#FDB913' }} onClick={proximoPasso}>
                   Próximo
                 </button>
               ) : (
-                <button 
-                  className="btn btn-success fw-bold px-4" 
+                <button
+                  className="btn btn-success fw-bold px-4"
                   onClick={finalizarPedido}
                   disabled={enviando}
                 >
@@ -168,7 +168,8 @@ export default function NovaSolicitacao() {
         </div>
       </main>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
       `}} />
